@@ -1,7 +1,11 @@
-def handle_start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Welcome to the Telegram Bot!")
+from telegram import Update
+from telegram.ext import ContextTypes
 
-def handle_message(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="You said: " + update.message.text)
+async def handle_message(update, context):
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="You said: " + update.message.text)
 
-__all__ = ['handle_start', 'handle_message']
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
+
+
+__all__ = ['handle_start', 'handle_message', 'start']
